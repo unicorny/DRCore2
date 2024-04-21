@@ -1,5 +1,5 @@
-#include "Core2Main.h"
-
+#include "DRCore2/DRUtils.h"
+#include "DRCore2/DRLogger.h"
 
 int DRGetNextPotenz(int iIn)
 {
@@ -14,7 +14,7 @@ int DRGetNextPotenz(int iIn)
 
 //****************************************************************
 
-DRReturn DRGetTermVorChar(DRString* sInput, DRString* sOutput, char cTrenn)
+DRReturn DRGetTermVorChar(std::string* sInput, std::string* sOutput, char cTrenn)
 {
 	u32 n = 0, n2 = 0;
 	const char* pcTemp = sInput->data();
@@ -39,7 +39,7 @@ DRReturn DRGetTermVorChar(DRString* sInput, DRString* sOutput, char cTrenn)
 
 //------------------------------------------------------------------------------
 
-DRReturn DRGetTermNachChar(DRString* sInput, DRString* sOutput, char cTrenn)
+DRReturn DRGetTermNachChar(std::string* sInput, std::string* sOutput, char cTrenn)
 {
 	size_t n = sInput->length(), n2 = sInput->length();
 	const char* pcTemp = sInput->data();
@@ -82,7 +82,7 @@ bool DRisMathChar(char czeichen)
 
 //*****************************************************************************
 
-int DRCountCharsOf(DRString* sInput, char cCountable)
+int DRCountCharsOf(std::string* sInput, char cCountable)
 {
 	int iret = 0;
 	const char* pcTemp = sInput->data();
@@ -96,7 +96,7 @@ int DRCountCharsOf(DRString* sInput, char cCountable)
 
 //*************************************************************************
 
-int DRCountNumbers(DRString* sInput)
+int DRCountNumbers(std::string* sInput)
 {
 	int iret = 0;
 	for(u32 i = 0; i < sInput->length(); i++)

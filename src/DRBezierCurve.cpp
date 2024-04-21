@@ -1,4 +1,8 @@
-#include "Core2Main.h"
+#include "DRCore2/DRBezierCurve.h"
+#include "DRCore2/DRTypes.h"
+#include "DRCore2/DRLogger.h"
+
+#include <memory>
 
 DRBezierCurve::DRBezierCurve(const DRVector2* input, const int nodeCount)
 	: DRBezierCurve(nodeCount)
@@ -7,22 +11,22 @@ DRBezierCurve::DRBezierCurve(const DRVector2* input, const int nodeCount)
 }
 
 DRBezierCurve::DRBezierCurve(const int nodeCount)
-	: mNodes(new DRVector2[nodeCount]), mNodeCount(nodeCount), mTempMemory(NULL), mTempMemorySize(0)
+	: mNodes(new DRVector2[nodeCount]), mNodeCount(nodeCount), mTempMemory(nullptr), mTempMemorySize(0)
 {
 }
 
 DRBezierCurve::DRBezierCurve()
-	: mNodes(NULL), mNodeCount(0), mTempMemory(NULL), mTempMemorySize(0)
+	: mNodes(nullptr), mNodeCount(0), mTempMemory(nullptr), mTempMemorySize(0)
 {
 }
 DRBezierCurve::DRBezierCurve(const DRBezierCurve& ref)
-	: mNodes(new DRVector2[ref.mNodeCount]), mNodeCount(ref.mNodeCount), mTempMemory(NULL), mTempMemorySize(0)
+	: mNodes(new DRVector2[ref.mNodeCount]), mNodeCount(ref.mNodeCount), mTempMemory(nullptr), mTempMemorySize(0)
 {
 	memcpy(mNodes, ref.mNodes, sizeof(DRVector2)*ref.mNodeCount);
 }
 
 DRBezierCurve::DRBezierCurve(DRVector2* input, const int nodeCount)
-	: mNodes(input), mNodeCount(nodeCount), mTempMemory(NULL), mTempMemorySize(0)
+	: mNodes(input), mNodeCount(nodeCount), mTempMemory(nullptr), mTempMemorySize(0)
 {
 
 }
@@ -190,7 +194,7 @@ DRBezierCurve* DRBezierCurve::gradreduktionAndSplit()
 	return NULL;
 }
 
-DRString DRBezierCurve::getAsString()
+std::string DRBezierCurve::getAsString()
 {
 	std::string str;
 	for (int i = 0; i < mNodeCount; i++) {

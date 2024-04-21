@@ -1,4 +1,4 @@
-#include "Core2Main.h"
+#include "DRCore2/DRRandom.h"
 
 /*    This program by D E Knuth is in the public domain and freely copyable.
  *    It is explained in Seminumerical Algorithms, 3rd edition, Section 3.6
@@ -39,7 +39,7 @@ void ran_array(aa,n)    /* put n new random numbers in aa */
   int n;      /* array length (must be at least KK) */
 #endif
 {
-  register int i,j;
+  int i, j;
   for (j=0;j<KK;j++) aa[j]=ran_x[j];
   for (;j<n;j++) aa[j]=mod_diff(aa[j-KK],aa[j-LL]);
   for (i=0;i<LL;i++,j++) ran_x[i]=mod_diff(aa[j-KK],aa[j-LL]);
@@ -64,9 +64,9 @@ void ran_start(seed)    /* do this before using ran_array */
   long seed;            /* selector for different streams */
 #endif
 {
-  register int t,j;
+  int t,j;
   long x[KK+KK-1];              /* the preparation buffer */
-  register long ss=(seed+2)&(MM-2);
+  long ss=(seed+2)&(MM-2);
   for (j=0;j<KK;j++) {
     x[j]=ss;                      /* bootstrap the buffer */
     ss<<=1; if (ss>=MM) ss-=MM-2; /* cyclic shift 29 bits */
@@ -114,7 +114,7 @@ void ranf_array(aa,n)    /* put n new random fractions in aa */
   int n;      /* array length (must be at least KK) */
 #endif
 {
-  register int i,j;
+  int i,j;
   for (j=0;j<KK;j++) aa[j]=ran_u[j];
   for (;j<n;j++) aa[j]=mod_sum(aa[j-KK],aa[j-LL]);
   for (i=0;i<LL;i++,j++) ran_u[i]=mod_sum(aa[j-KK],aa[j-LL]);
@@ -139,7 +139,7 @@ void ranf_start(seed)    /* do this before using ranf_array */
   long seed;            /* selector for different streams */
 #endif
 {
-  register int t,s,j;
+  int t,s,j;
   double u[KK+KK-1];
   double ulp=(1.0/(1L<<30))/(1L<<22);               /* 2 to the -52 */
   double ss=2.0*ulp*((seed&0x3fffffff)+2);
@@ -213,9 +213,9 @@ void xorshift_seed(u32 seed)
 
 // static vars
 long random_buffer[KK];
-uint rand_buffer_cursor = KK;
+unsigned int rand_buffer_cursor = KK;
 double randomf_buffer[KK];
-uint randf_buffer_cursor = KK;
+unsigned int randf_buffer_cursor = KK;
 
 //***************************************************************************************************************
 void DRRandom::seed(long seed)

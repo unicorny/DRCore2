@@ -1,4 +1,5 @@
-#include "Core2Main.h"
+#include "DRCore2/DRVector3.h"
+#include "DRCore2/DRMatrix.h"
 
 DRVector3 DRVector3::transformNormal(const DRMatrix& m) const
 {

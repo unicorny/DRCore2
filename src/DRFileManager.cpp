@@ -1,6 +1,11 @@
 //#include "DRFileManager.h"
-#define _CRT_SECURE_NO_WARNINGS
-#include "Core2Main.h"
+// #define _CRT_SECURE_NO_WARNINGS
+
+#include "DRCore2/DRFileManager.h"
+#include "DRCore2/DRLogger.h"
+#include "DRCore2/DRHash.h"
+
+#include <direct.h>
 
 using namespace std;
 
@@ -15,7 +20,7 @@ DRFileManager& DRFileManager::Instance()
 DRReturn DRFileManager::init()
 {
 	m_bInitialized = true;
-	LOG_INFO("File Manager initaliesiert!");
+	LOG_INFO("File Manager initalisiert!");
 	return DR_OK;
 }
 

@@ -1,4 +1,5 @@
-#include "Core2Main.h"
+#include "DRCore2/DRDampingSpring.h"
+
 /*
 DRSpring::DRSpring()
 : mVar(0.0f), mTime(0.0f), mTimeTarget(0.0f)

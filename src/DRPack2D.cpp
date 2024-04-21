@@ -1,4 +1,7 @@
-#include "Core2Main.h"
+#include "DRCore2/DRPack2D.h"
+
+#include <cassert>
+#include <algorithm>
 
 // ****************** DRPack2D_Rect *************************************************************
 void DRPack2D_Rect::fillColorArrayWithColorRect(DRColor* colors, const DRVector2i& dim, const DRColor& col) const
@@ -203,14 +206,14 @@ DRReturn DRPack2D::pack2D(const DRVector2i& iDimension)
 				// add new space(s)
 				// right split
 				auto rightSplit = DRPack2D_Rect(
-					DRVector2(space.pos.x + local_inputSize.size.x, space.pos.y),			// position
-					DRVector2(space.size.x - local_inputSize.size.x, local_inputSize.size.y)  // size
+					DRVector2i(space.pos.x + local_inputSize.size.x, space.pos.y),			// position
+					DRVector2i(space.size.x - local_inputSize.size.x, local_inputSize.size.y)  // size
 				);
 				
 				// bottom split
 				auto bottomSplit = DRPack2D_Rect(
-					DRVector2(space.pos.x, space.pos.y + local_inputSize.size.y),
-					DRVector2(space.size.x, space.size.y - local_inputSize.size.y)
+					DRVector2i(space.pos.x, space.pos.y + local_inputSize.size.y),
+					DRVector2i(space.size.x, space.size.y - local_inputSize.size.y)
 				);
 				
 				// add bigger split first

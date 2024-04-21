@@ -1,4 +1,5 @@
-#include "Core2Main.h"
+#include "DRCore2/DRResourcePtrHolder.h"
+#include "DRCore2/DRTypes.h"
 
 DRResourcePtrHolder::DRResourcePtrHolder(DRIResource* resource)
 : mResource(resource), mRefCount(0)

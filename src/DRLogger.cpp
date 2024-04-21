@@ -1,5 +1,14 @@
-#include "Core2Main.h"
+#include "DRCore2/DRLogger.h"
+#include "DRCore2/DRVector2.h"
+#include "DRCore2/DRVector2i.h"
+#include "DRCore2/DRVector3.h"
+#include "DRCore2/DRColor.h"
+#include "DRCore2/DRMatrix.h"
+
 #include <sstream>
+#include <cstdarg>
+
+DRLogger DRLog;
 
 //Konstuktor und Deskonstruktor
 DRLogger::DRLogger()
@@ -43,11 +52,11 @@ DRReturn DRLogger::init(const char* pcFilename, bool printToConsole)
 	strcpy(m_acFilename, pcFilename);
 #endif
 
-	//�ffnen zum �berschreiben
+	//Oeffnen zum ueberschreiben
 	//m_pFile = fopen(m_acFilename, "w");
 	m_File.open(m_acFilename, true, "wt");
 
-	//pr�fen
+	//pruefen
 	if(!m_File.isOpen()) return DR_ERROR;
 
 	//Was reinschreiben
@@ -57,11 +66,6 @@ DRReturn DRLogger::init(const char* pcFilename, bool printToConsole)
 	char acTemp[] = "<HTML>\n<head><style type='text/css'>table.pixelGrid td {width:4px; height:4px;padding:0;}</style>\n<title>Log Datei</title></head><body>\n<font face=\"Arial\" size=\"2\">\n<table>";
 	m_File.write(acTemp, sizeof(char), strlen(acTemp));
 	writeToLog("Init des Loggers erfolgreich!");
-//	char acTemp2[] = "<tr><a href= http://www.mathe-programme.de.tt> Homepage </a><br>Ein Programm von Dario Rekowski.</tr>";
-	writeToLog("Ein Programm von Dario Rekowski.\nVerwendet die Core2.dll von Dario Rekowski\n<a href= http://www.spacecrafting.de> Homepage </a>");
-//	m_File.write(acTemp2, sizeof(char), strlen(acTemp2));
-
-
 	//schließen
 //	fclose(m_pFile);
 //	m_pFile = NULL;
@@ -154,15 +158,15 @@ DRReturn DRLogger::writeColorToLog(const DRColor& c)
 {
 	char acHexColor[9];
 #ifdef _WIN32
-	sprintf_s(acHexColor, "%x", (int)(c) << 8);
+	sprintf_s(acHexColor, "%x", (u32)(c) << 8);
 #else 
-	sprintf(acHexColor, "%x", (int)(c) << 8);
+	sprintf(acHexColor, "%x", (u32)(c) << 8);
 #endif
 	acHexColor[6] = 0;
 
 	// Farbe in die Logbuchdatei schreiben
 	return writeToLogDirect("<tr><td><font size=\"2\"><b><font color=\"#000080\">Farbe:</font></b> a = <i>%.3f</i>, r = <i>%.3f</i>, g = <i>%.3f</i>, b = <i>%.3f</i>, Hexadezimal: <i>0x%x</i>, <font color=\"#%s\"><i>Probetext</i></font></td></tr>",
-                              c.a, c.r, c.g, c.b, (int)(c), acHexColor);
+                              c.a, c.r, c.g, c.b, (u32)(c), acHexColor);
 }
 
 // *************************************************************************
@@ -177,7 +181,7 @@ DRReturn DRLogger::writePixelGridToLog(DRColor* colors, DRVector2i dim)
 		for (int x = 0; x < dim.x; x++) {
 			char acHexColor[9];
 			auto c = colors[y*dim.x + x];
-			sprintf(acHexColor, "%08x", (int)(c) << 8);
+			sprintf(acHexColor, "%08x", (u32)(c) << 8);
 			//acHexColor[6] = 0;
 			acHexColor[6] = 'f';
 			acHexColor[7] = 'f';
@@ -210,14 +214,14 @@ DRReturn DRLogger::writeToLog(const char* pcText, ...)
 #endif
 	va_end(Argumente);
     
-    return writeToLog(DRString(acBuffer));
+    return writeToLog(std::string(acBuffer));
 }
 
-DRReturn DRLogger::writeToLog(DRString text)
+DRReturn DRLogger::writeToLog(std::string text)
 {
-    DRString final = DRString("<tr><td><font size=\"2\" color=\"#000080\">");
+	std::string final = std::string("<tr><td><font size=\"2\" color=\"#000080\">");
     final += text;
-    final += DRString("</font></td></tr>");
+    final += std::string("</font></td></tr>");
     
     return writeToLogDirect(final);
 }
@@ -240,10 +244,10 @@ DRReturn DRLogger::writeToLogDirect(const char* pcText, ...)
 #endif
 	va_end(Argumente);
     
-    return writeToLogDirect(DRString(acBuffer));
+    return writeToLogDirect(std::string(acBuffer));
 }
 
-DRReturn DRLogger::writeToLogDirect(DRString text)
+DRReturn DRLogger::writeToLogDirect(std::string text)
 {    
 	//Datei zum anhängen öffnen (wenn sie es nicht schon ist)
 	if(!m_File.isOpen()) m_File.open(m_acFilename, false, "at");
@@ -275,8 +279,8 @@ DRReturn DRLogger::writeToLogDirect(DRString text)
     }
         
 	//ersetzen der \n durch <br>
-	DRString final = text;
-	while(text.find('\n') != DRString::npos)
+	std::string final = text;
+	while(text.find('\n') != std::string::npos)
 		text.replace(text.find('\n'),1,"<br>");
 
 	//einfügen eines Zeilenumbruchs und Formationen
@@ -289,8 +293,6 @@ DRReturn DRLogger::writeToLogDirect(DRString text)
 	fflush(m_File.getFile());
 	//m_File.close();
 //	m_pFile = NULL;
-	// Zusätzlich wird noch eine Debug-Ausgabe erzeugt.
-	OutputDebugString(text.data());
 #endif
     
 	return DR_OK;

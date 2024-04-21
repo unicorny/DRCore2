@@ -1,7 +1,7 @@
-#include "Core2Main.h"
+#include "DRCore2/DRBaseExceptions.h"
 
 DRCoreBaseException::DRCoreBaseException(const char* what) noexcept
-	: std::exception(what)
+	: std::runtime_error(what)
 {
 
 }

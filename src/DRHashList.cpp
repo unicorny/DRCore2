@@ -2,7 +2,10 @@
 //	hash list implementation
 //------------------------------------------------------------------
 
-#include "Core2Main.h"
+#include "DRCore2/DRHashList.h"
+
+#include <math.h>
+#include <memory>
 
 using namespace std;
 

@@ -1,5 +1,5 @@
-#define _CRT_SECURE_NO_WARNINGS
-#include "Core2Main.h"
+// #define _CRT_SECURE_NO_WARNINGS
+#include "DRCore2/DRIni.h"
 
 using namespace std;
 
@@ -17,7 +17,7 @@ mValid(false)
     char c;
     if(!mFilePointer)
     {
-        fprintf(stderr, "Achtung, %s konnte nicht ge�ffnet werden!! (DRIni::DRIni)", fileName);
+        fprintf(stderr, "Achtung, %s konnte nicht geoeffnet werden!! (DRIni::DRIni)", fileName);
     }
     else
     {

@@ -1,4 +1,5 @@
-#include "Core2Main.h"
+#include "DRCore2/DRCubicSpline.h"
+#include "DRCore2/DRLogger.h"
 
 DRVector3 DRCubicSpline::getPoint(float fTime)
 {
@@ -108,7 +109,7 @@ DRVector3 DRRNS::getPoint(float fTime, int rekursion)
 	if(mNodes.size() == 0) return DRVector3(0.0f);
 	float distance = fTime * mMaxDistance;
 	float currentDistance = 0.f;
-	uint i = 0;
+	unsigned int i = 0;
 	while (currentDistance + mNodes[i].distance < distance
 	    && i < mNodes.size())
 	{

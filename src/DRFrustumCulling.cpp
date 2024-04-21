@@ -1,6 +1,7 @@
-#include "Core2Main.h"
+#include "DRCore2/DRFrustumCulling.h"
+#include "DRCore2/DRLogger.h"
 
-DRFrustumCulling::DRFrustumCulling(DRObjekt* camera, DRReal fovAngle, DRReal aspectRatio, DRReal zNearPlane, DRReal zFarPlane)
+DRFrustumCulling::DRFrustumCulling(DRObject* camera, DRReal fovAngle, DRReal aspectRatio, DRReal zNearPlane, DRReal zFarPlane)
 : mCamera(camera), mNearPlane(zNearPlane), mFarPlane(zFarPlane), mAspectRatio(aspectRatio), mFovAngle(fovAngle), mFovAngleTangent(tan(fovAngle)), mSphereFactorX(0.0f)
 {
     updateMatritzen(fovAngle, aspectRatio, zNearPlane, zFarPlane);    

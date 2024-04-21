@@ -1,4 +1,6 @@
-#include "Core2Main.h"
+#include "DRCore2/DRMatrix.h"
+#include "DRCore2/DRVector3.h"
+
 #include <immintrin.h>
 
 #ifndef _mm256_set_m128

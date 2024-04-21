@@ -1,5 +1,6 @@
-#include "Core2Main.h"
-
+#include "DRCore2/DRVector2.h"
+#include "DRCore2/DRMatrix.h"
+ 
 // 2D-Vektor mit Matrix multiplizieren
 DRVector2 DRVector2::transformCoords(const DRMatrix& m, DRReal* const pfOutW/* = NULL*/) const
 {

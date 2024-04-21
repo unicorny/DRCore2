@@ -1,14 +1,14 @@
 
-//Infos siehe Header
-#define  _CRT_SECURE_NO_WARNINGS
-#include "Core2Main.h"
-#include "DRFileManager.h"
+// #define  _CRT_SECURE_NO_WARNINGS
+#include <string>
 
-
+#include "DRCore2/DRFile.h"
+#include "DRCore2/DRFileManager.h"
+#include "DRCore2/DRLogger.h"
 
 //Konstruktor, Copykonstruktor und Deskonstruktor
 DRFile::DRFile()
-: mFile(NULL), mFileSize(0)
+: mFile(nullptr), mFileSize(0)
 {
 
 }
@@ -16,7 +16,7 @@ DRFile::DRFile()
 //-----------------------------------------------------------
 #ifdef _WIN32
 DRFile::DRFile(const wchar_t* pstFilename, const wchar_t* pstMode/* = L"a+b"*/)
-: mFile(NULL), mFileSize(0)
+: mFile(nullptr), mFileSize(0)
 {
 	open(pstFilename, pstMode);
 }
@@ -293,7 +293,7 @@ bool DRIsFileExist(const char* pcFilename)
 	}
 	else
 	{
-        pFile = fopen(DRString(DRString(path)+"/"+pcFilename).data(), "rb");
+        pFile = fopen(std::string(std::string(path)+"/"+pcFilename).data(), "rb");
 	}
     
 	if(pFile)
