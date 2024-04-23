@@ -1,6 +1,6 @@
 #include "DRCore2/DRCore2Main.h"
-#include "DRCore2/DRLogger.h"
-#include "DRCore2/DRFileManager.h"
+#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Manager/DRFileManager.h"
 
 // Counter for dll use
 int gCurrentNumUser = 0;

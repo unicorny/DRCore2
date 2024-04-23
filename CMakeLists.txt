@@ -12,8 +12,21 @@ if (DEFINED DRCore2_SHARED_LIBS)
     set(BUILD_SHARED_LIBS "${DRCore2_SHARED_LIBS}")
 endif ()
 
+
+FILE(GLOB ALGORITHM "include/DRCore2/Algorithm/*.h" "src/Algorithm/*.cpp")
+FILE(GLOB FOUNDATION "include/DRCore2/Foundation/*.h" "src/Foundation/*.cpp")
+FILE(GLOB MANAGER "include/DRCore2/Manager/*.h" "src/Manager/*.cpp")
+FILE(GLOB TASK "include/DRCore2/Task/*.h" "src/Task/*.cpp")
 FILE(GLOB SRC "include/DRCore2/*.h" "src/*.cpp")
-add_library(DRCore2 ${SRC})
+
+if (MSVC)
+  source_group("Algorithm" FILES ${ALGORITHM})
+  source_group("Foundation" FILES ${FOUNDATION})
+  source_group("Manager" FILES ${MANAGER})
+  source_group("Task" FILES ${TASK})
+endif()
+
+add_library(DRCore2 ${ALGORITHM} ${FOUNDATION} ${MANAGER} ${TASK} ${SRC})
 add_library(DRCore2::DRCore2 ALIAS DRCore2)
 set_target_properties(DRCore2 PROPERTIES
                       VERSION ${DRCore2_VERSION}
