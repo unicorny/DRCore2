@@ -25,6 +25,7 @@
  \brief Container Wrapper class for mutex protected container
    changed to poco mutex for gradido login server
    default mutex from poco is recursive so it is some heavy thing
+   changed to std::mutex for DRCore2   
 
  \author Dario Rekowski
 

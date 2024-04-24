@@ -28,7 +28,7 @@
  *
  * \brief Scheduler for CPU Tasks, multiple threads
  *
- * Modified to use Poco::Thread instead SDL Threads
+ * Modified to use std::thread instead Poco::Thread instead SDL Threads
  */
 
 #ifndef __DR_UNIVERSUM_LIB_CONTROLLER_CPU_SCHEDULER_H__
