@@ -1,6 +1,7 @@
 # Setup inspired from https://alexreinking.com/blog/building-a-dual-shared-and-static-library-with-cmake.html
 cmake_minimum_required(VERSION 3.19)
 project(DRCore2 VERSION 1.0.0)
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 if (NOT DEFINED CMAKE_CXX_VISIBILITY_PRESET AND
     NOT DEFINED CMAKE_VISIBILITY_INLINES_HIDDEN)
@@ -16,17 +17,19 @@ endif ()
 FILE(GLOB ALGORITHM "include/DRCore2/Algorithm/*.h" "src/Algorithm/*.cpp")
 FILE(GLOB FOUNDATION "include/DRCore2/Foundation/*.h" "src/Foundation/*.cpp")
 FILE(GLOB MANAGER "include/DRCore2/Manager/*.h" "src/Manager/*.cpp")
-FILE(GLOB TASK "include/DRCore2/Task/*.h" "src/Task/*.cpp")
+FILE(GLOB UTILS "include/DRCore2/Utils/*.h" "src/Utils/*.cpp")
+FILE(GLOB THREADING "include/DRCore2/Threading/*.h" "src/Threading/*.cpp")
 FILE(GLOB SRC "include/DRCore2/*.h" "src/*.cpp")
 
 if (MSVC)
   source_group("Algorithm" FILES ${ALGORITHM})
   source_group("Foundation" FILES ${FOUNDATION})
   source_group("Manager" FILES ${MANAGER})
-  source_group("Task" FILES ${TASK})
+  source_group("Threading" FILES ${THREADING})
+  source_group("Utils" FILES ${UTILS})
 endif()
 
-add_library(DRCore2 ${ALGORITHM} ${FOUNDATION} ${MANAGER} ${TASK} ${SRC})
+add_library(DRCore2 ${ALGORITHM} ${FOUNDATION} ${MANAGER} ${THREADING} ${SRC} ${UTILS})
 add_library(DRCore2::DRCore2 ALIAS DRCore2)
 set_target_properties(DRCore2 PROPERTIES
                       VERSION ${DRCore2_VERSION}

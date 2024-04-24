@@ -6,6 +6,7 @@
 int gCurrentNumUser = 0;
 int gCurrentRun = 0;
 #ifdef _WIN32
+#include <windows.h>
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
     switch (fdwReason)

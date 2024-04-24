@@ -23,8 +23,8 @@ enum DRReturn
 };
 
 //Makros um etwas schneller zu löschen
-#define DR_SAVE_DELETE(x) {if(x){delete x; x = NULL;}}
-#define DR_SAVE_DELETE_ARRAY(x) {if(x){delete [] x; x = NULL;}}
+#define DR_SAVE_DELETE(x) {if(x){delete x; x = nullptr;}}
+#define DR_SAVE_DELETE_ARRAY(x) {if(x){delete [] x; x = nullptr;}}
 
 #ifndef u8
 #define u8 uint8_t

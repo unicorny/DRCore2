@@ -18,39 +18,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.   *
  *                                                                         *
  ***************************************************************************/
-
-
 #ifndef __DR_CORE2_MAIN__
 #define __DR_CORE2_MAIN__
 
-/*#ifndef _DEBUG
-#define _DEBUG
-#endif _DEBUG
-*/
-
-//#define _DEBUG
-
+/*
 #ifdef _WIN32
-//#define _WINSOCKAPI_
 #include <windows.h>
 #include <direct.h>
 #else
 #include <sys/stat.h>
 #include <sys/errno.h>
 #endif
+*/
 
 #include "DRCore2/export.h"
 #include "DRTypes.h"
 
 
-#ifdef _WIN32
+/*#ifdef _WIN32
 #pragma warning (disable : 4251) 
 #pragma warning (disable : 4201)
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS 1
 #endif
 #endif //_WIN32
-
+*/
 //ä = \303\244
 //ü = \303\274
 //ö = \303\266

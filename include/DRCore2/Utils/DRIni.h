@@ -23,9 +23,9 @@
 #define __DR_CORE2_INI__
 
 #include "DRCore2/export.h"
-#include "DRVector3.h"
-#include "DRVector2.h"
-#include "DRColor.h"
+#include "DRCore2/Foundation/DRVector3.h"
+#include "DRCore2/Foundation/DRVector2.h"
+#include "DRCore2/Foundation/DRColor.h"
 
 /*
 class to read from ini Files

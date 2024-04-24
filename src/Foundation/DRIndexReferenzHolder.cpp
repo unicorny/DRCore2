@@ -3,8 +3,10 @@
 #include "DRCore2/Foundation/DRIndexReferenzHolder.h"
 #include "DRCore2/Foundation/DRLogger.h"
 
+#include <cassert>
+
 DRIndexReferenzHolder::DRIndexReferenzHolder(unsigned int maxIndexCount)
-: mReferenzCounter(NULL), mFreePlaces(NULL), mFreePlaceCursor(0), mMaxIndexCount(maxIndexCount)
+: mReferenzCounter(nullptr), mFreePlaces(nullptr), mFreePlaceCursor(0), mMaxIndexCount(maxIndexCount)
 {
     mReferenzCounter = new unsigned int[maxIndexCount];
     memset(mReferenzCounter, 0, sizeof(unsigned int)*maxIndexCount);
@@ -34,14 +36,15 @@ void DRIndexReferenzHolder::add(unsigned int index)
 
 void DRIndexReferenzHolder::remove(unsigned int index)
 {
+    assert(mReferenzCounter[index] > 0);
     mReferenzCounter[index]--;
-    if(mReferenzCounter[index] <= 0)
+    if(mReferenzCounter[index] == 0)
         mFreePlaces[mFreePlaceCursor++] = index;
 }
 
 unsigned int DRIndexReferenzHolder::getFree()
 {
-    if(mFreePlaceCursor <= 0)
+    if(mFreePlaceCursor == 0)
     {
         LOG_ERROR("Kein Platz mehr in der Liste!", 0);
     }

@@ -14,22 +14,12 @@ DRLogger DRLog;
 DRLogger::DRLogger()
 : m_bPrintToConsole(false)
 {
-	//m_pFile = NULL;
-#ifdef _WIN32 
-	strcpy_s(m_acFilename, "NotInitLogger.html");
-#else 
-	strcpy(m_acFilename, "NotInitLogger.html");
-#endif
 }
 
 DRLogger::DRLogger(const DRLogger& log)
+	: m_bPrintToConsole(log.m_bPrintToConsole)
 {
-#ifdef _WIN32 
-	strcpy_s(m_acFilename, log.m_acFilename);
-#else
-    strcpy(m_acFilename, log.m_acFilename);
-#endif
-
+	mLogFileName = log.mLogFileName;
 }
 
 //------------------------------------------------------
@@ -40,35 +30,22 @@ DRLogger::~DRLogger()
 //-------------------------------------------------------
 //--------------------------------------------------------
 //init und Exit
-DRReturn DRLogger::init(const char* pcFilename, bool printToConsole)
+DRReturn DRLogger::init(const std::string& logFilename, bool printToConsole)
 {
     m_bPrintToConsole = printToConsole;
-    
-	//Filenamen kopieren
-	//sprintf(m_acFilename, pcFilename);
-#ifdef _WIN32
-	strcpy_s(m_acFilename, pcFilename);
-#else 
-	strcpy(m_acFilename, pcFilename);
-#endif
+	mLogFileName = logFilename;
 
 	//Oeffnen zum ueberschreiben
 	//m_pFile = fopen(m_acFilename, "w");
-	m_File.open(m_acFilename, true, "wt");
+	m_File.open(mLogFileName.data(), true, "wt");
 
 	//pruefen
 	if(!m_File.isOpen()) return DR_ERROR;
 
-	//Was reinschreiben
-//	fprintf(m_pFile, "Init des Loggers erfolgreich!\n");
-
 	m_File.setFilePointer(0, SEEK_SET);
-	char acTemp[] = "<HTML>\n<head><style type='text/css'>table.pixelGrid td {width:4px; height:4px;padding:0;}</style>\n<title>Log Datei</title></head><body>\n<font face=\"Arial\" size=\"2\">\n<table>";
-	m_File.write(acTemp, sizeof(char), strlen(acTemp));
+	std::string header = "<HTML>\n<head><style type='text/css'>table.pixelGrid td {width:4px; height:4px;padding:0;}</style>\n<title>Log Datei</title></head><body>\n<font face=\"Arial\" size=\"2\">\n<table>";
+	m_File.write(header.data(), sizeof(char), header.size());
 	writeToLog("Init des Loggers erfolgreich!");
-	//schließen
-//	fclose(m_pFile);
-//	m_pFile = NULL;
 	m_File.close();
 	return DR_OK;
 }
@@ -78,7 +55,7 @@ DRReturn DRLogger::init(const char* pcFilename, bool printToConsole)
 void DRLogger::exit()
 {
 	//if(!m_pFile) m_pFile = fopen(m_acFilename, "a");
-	if(!m_File.isOpen()) m_File.open(m_acFilename, false, "at");
+	if(!m_File.isOpen()) m_File.open(mLogFileName.data(), false, "at");
 	m_File.setFilePointer(0, SEEK_END);
 	//fprintf(m_pFile, "-----------------------------------------------------\nEnde gut alles gut.");
 	//fclose(m_pFile);
@@ -250,7 +227,7 @@ DRReturn DRLogger::writeToLogDirect(const char* pcText, ...)
 DRReturn DRLogger::writeToLogDirect(std::string text)
 {    
 	//Datei zum anhängen öffnen (wenn sie es nicht schon ist)
-	if(!m_File.isOpen()) m_File.open(m_acFilename, false, "at");
+	if(!m_File.isOpen()) m_File.open(mLogFileName.data(), false, "at");
 
 	//wenns nicht geht, Fehler
 	if(!m_File.isOpen()) return DR_ERROR;
@@ -262,8 +239,8 @@ DRReturn DRLogger::writeToLogDirect(std::string text)
         size_t size = text.size();
         char* buffer1 = new char[size+1];
         char* buffer2 = new char[size+1];
-		memset(buffer1, 0, sizeof(size+1));
-		memset(buffer2, 0, sizeof(size+1));
+		memset(buffer1, 0, size+1);
+		memset(buffer2, 0, size+1);
         if(buffer1 && buffer2)
         {
 #ifdef _WIN32

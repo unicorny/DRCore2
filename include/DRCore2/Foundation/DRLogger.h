@@ -35,6 +35,7 @@ Programmierer: Dario Rekowski
 #include "DRUtils.h"
 
 #include <string>
+#include <fstream>
 
 //Vorw&auml;rtsdeklaarionen f&uuml;r den Logger
 class DRVector2;
@@ -55,20 +56,26 @@ class DRCORE2_EXPORT DRLogger
 
 private:
 	//Membervariablen
-	DRFile m_File;			//Log-File
-	char  m_acFilename[256];//Dateinamen des Log-Files
-    bool    m_bPrintToConsole;
+	DRFile		m_File;			//Log-File
+	std::string mLogFileName;
+    bool		m_bPrintToConsole;
 
 public:
+	enum class LogFormat {
+		INFO,
+		WARNING,
+		ERROR
+	};
+
 	//Und die &ouml;ffentlichen Funktionen
 	DRLogger();
     DRLogger(const DRLogger& log);
 	virtual ~DRLogger();
 
-	virtual DRReturn init(const char* pcFilename, bool printToConsole);
+	virtual DRReturn init(const std::string& logFilename, bool printToConsole);
 	virtual void exit();
         
-        void setPrintToConsole(bool printToConsole) {m_bPrintToConsole = printToConsole;}
+    void setPrintToConsole(bool printToConsole) {m_bPrintToConsole = printToConsole;}
 
 	//in die Log-Datei schreiben
 	virtual DRReturn writeToLog(const char* pcText, ...);

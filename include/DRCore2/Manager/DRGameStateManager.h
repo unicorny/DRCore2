@@ -32,10 +32,10 @@
 #include "DRCore2/DRTypes.h"
 
 #include "DRCore2/Foundation/DRIResource.h"
-#include "DRCore2/Foundation/DRResourcePtr.h"
 
 #include <map>
 #include <list>
+#include <memory>
 
 class DRCORE2_EXPORT DRGameState: public DRIResource
 {
@@ -59,7 +59,7 @@ protected:
     float       mTransparency;
     bool        mFirstState;//the state who call glClear
 };
-typedef DRResourcePtr<DRGameState> DRGameStatePtr;
+typedef std::shared_ptr<DRGameState> DRGameStatePtr;
 
 class DRCORE2_EXPORT DRGameStateManager
 {
