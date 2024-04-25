@@ -102,24 +102,12 @@ public:
 
 	//Info Text in Logbuch Datei schreiben
 
-	#define LOG_INFO_INTERN(text) writeToLog("<tr><td><font size=\"2\"><b><font color=\"#008000\">INFO:</font></b> %s</font></td><td><font size=\"2\"> (<i>%s</i>, Zeile <i>%d</i>, Funktion <i>%s</i>)</font></td></tr>", text,  DRRemoveDir(__FILE__), __LINE__, __FUNCTION__)
+	#define LOG_INFO_INTERN(text) writeToLog("<tr><td><font size=\"2\"><b><font color=\"#008000\">INFO:</font></b> %s</font></td><td><font size=\"2\"> (<i>%s</i>, Zeile <i>%d</i>, Funktion <i>%s</i>)</font></td></tr>", text,  DRRemoveDir(__FILE__), __LINE__, DR_FUNCTION_)
 	// Fehlertext in Logbuchdatei schreiben
-	#define LOG_ERROR_INTERN(text) writeToLog("<tr><td><font size=\"2\"><b><font color=\"#FF0000\">FEHLER:</font></b> %s</font></td><td><font size=\"2\"> (<i>%s</i>, Zeile <i>%d</i>, Funktion <i>%s</i>)</font></td></tr>", text,  DRRemoveDir(__FILE__), __LINE__, __FUNCTION__)
+	#define LOG_ERROR_INTERN(text) writeToLog("<tr><td><font size=\"2\"><b><font color=\"#FF0000\">FEHLER:</font></b> %s</font></td><td><font size=\"2\"> (<i>%s</i>, Zeile <i>%d</i>, Funktion <i>%s</i>)</font></td></tr>", text,  DRRemoveDir(__FILE__), __LINE__, DR_FUNCTION_)
 	// Warnungstext in Logbuchdatei schreiben
-	#define LOG_WARNING_INTERN(text) writeToLog("<tr><td><font size=\"2\"><b><font color=\"#FF0000\">WARNUNG:</font></b> %s</font></td><td><font size=\"2\"> (<i>%s</i>, Zeile <i>%d</i>, Funktion <i>%s</i>)</font></td></tr>", text, DRRemoveDir(__FILE__), __LINE__, __FUNCTION__)
+	#define LOG_WARNING_INTERN(text) writeToLog("<tr><td><font size=\"2\"><b><font color=\"#FF0000\">WARNUNG:</font></b> %s</font></td><td><font size=\"2\"> (<i>%s</i>, Zeile <i>%d</i>, Funktion <i>%s</i>)</font></td></tr>", text, DRRemoveDir(__FILE__), __LINE__, DR_FUNCTION_)
 
 };
-
-//Globale Variablen
-DRCORE2_EXPORT extern DRLogger DRLog;
-
-//makros für Log Benutzung
-#define WRITETOLOG(str, pl) DRLog.writeToLog(str, pl);
-//#define DR_ERROR(str, ret) {DRLog.LOG_ERROR_INTERN(str); return ret;}
-#define LOG_ERROR(str, ret) {DRLog.LOG_ERROR_INTERN(str); return ret;}
-#define LOG_ERROR_VOID(str) {DRLog.LOG_ERROR_INTERN(str); return;}
-#define LOG_INFO(str) DRLog.LOG_INFO_INTERN(str);
-#define LOG_WARNING(str) DRLog.LOG_WARNING_INTERN(str);
-
 
 #endif //__DR_CORE2_LOGGER__

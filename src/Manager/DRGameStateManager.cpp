@@ -1,6 +1,6 @@
 #include "DRCore2/Manager/DRGameStateManager.h"
 #include "DRCore2/Foundation/DRHash.h"
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 
 DRGameStateManager::DRGameStateManager()
 {

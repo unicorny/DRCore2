@@ -1,7 +1,7 @@
 #include "DRCore2/DRTypes.h"
 
 #include "DRCore2/Foundation/DRIndexReferenzHolder.h"
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 
 #include <cassert>
 

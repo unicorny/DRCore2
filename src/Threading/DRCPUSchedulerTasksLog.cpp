@@ -1,5 +1,5 @@
 #include "DRCore2/Threading/DRCPUSchedulerTasksLog.h"
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 #include <sstream>
 
 #ifdef DEBUG

@@ -5,7 +5,6 @@
 #include <memory.h>
 
 
-
 DRCPUScheduler::DRCPUScheduler(uint8_t threadCount, const std::string& name)
 	: mThreads(new DRCPUSchedulerThread*[threadCount]), mThreadCount(threadCount), mName(name), mStopped(false)
 {

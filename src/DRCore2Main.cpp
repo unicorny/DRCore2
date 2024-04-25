@@ -1,10 +1,11 @@
 #include "DRCore2/DRCore2Main.h"
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 #include "DRCore2/Manager/DRFileManager.h"
 
 // Counter for dll use
 int gCurrentNumUser = 0;
 int gCurrentRun = 0;
+
 #ifdef _WIN32
 #include <windows.h>
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)

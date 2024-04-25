@@ -35,7 +35,7 @@
 #include "DRCore2/export.h"
 #include "DRThread.h"
 #ifdef DEBUG
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 #endif
 
 #include <memory>
@@ -48,7 +48,7 @@ class DRCORE2_EXPORT DRCPUSchedulerThread : public DRThread
 {
 public: 
 #ifdef DEBUG
-	DRCPUSchedulerThread(DRCPUScheduler& parent, const char* name, DRLogger& speedLog);
+	DRCPUSchedulerThread(DRCPUScheduler& parent, const char* name, DRMultithreadLogger& speedLog);
 #else 
 	DRCPUSchedulerThread(DRCPUScheduler& parent, const char* name);
 #endif
@@ -65,7 +65,7 @@ public:
 
 protected:
 #ifdef DEBUG
-	DRLogger& mSpeedLog;
+	DRMultithreadLogger& mSpeedLog;
 #endif
 			
 private: 

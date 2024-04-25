@@ -49,7 +49,7 @@
 //ß = \303\237
 
 DRCORE2_EXPORT DRReturn Core2_init(const char* logFileName = "Logger.html");
-DRCORE2_EXPORT void      Core2_exit();
+DRCORE2_EXPORT void     Core2_exit();
 
 
 #endif // __DR_CORE2_MAIN__

@@ -1,6 +1,7 @@
 #include "DRCore2/Foundation/DRBaseExceptions.h"
 #include "DRCore2/Threading/DRCPUSchedulerThread.h"
 #include "DRCore2/Threading/DRCPUScheduler.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 #include "DRCore2/Threading/DRTask.h"
 #include "DRCore2/Threading/DRCPUSchedulerTasksLog.h"
 
@@ -9,7 +10,7 @@
 #endif //DEBUG
 
 #ifdef DEBUG
-DRCPUSchedulerThread::DRCPUSchedulerThread(DRCPUScheduler& parent, const char* name, DRLogger& speedLog)
+DRCPUSchedulerThread::DRCPUSchedulerThread(DRCPUScheduler& parent, const char* name, DRMultithreadLogger& speedLog)
   : DRThread(name), mParent(parent), mSpeedLog(speedLog)
 {
 	mWaitingTask = mParent.getNextUndoneTask(this);

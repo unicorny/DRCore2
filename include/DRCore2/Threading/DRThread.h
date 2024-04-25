@@ -50,9 +50,11 @@ public:
     void condSignal();
 
 	void init();
+    void exit();
 
 	void run();
 
+    inline void setName(const char* threadName) { mThreadName = threadName; }
     inline const std::string& getName() const { return mThreadName; }
 protected:
     //! \brief will be called every time from thread, when condSignal was called
@@ -61,6 +63,7 @@ protected:
     //! \return if return isn't 0, thread will exit
     virtual int ThreadFunction() = 0;
 
+private: 
     std::mutex              mMutex;
     std::thread*            mThread;
     std::condition_variable mCondition;

@@ -3,7 +3,7 @@
 #include "DRCore2/DRTypes.h"
 #include "DRCore2/Threading/DRThread.h"
 #include "DRCore2/Foundation/DRBaseExceptions.h"
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 
 DRThread::DRThread(const char* threadName)
     : mThread(nullptr), mExitCalled(false), mThreadName(threadName)
@@ -15,17 +15,24 @@ void DRThread::init()
 	mThread = new std::thread(&DRThread::run, this);	
 }
 
+void DRThread::exit()
+{
+	{
+		std::unique_lock _lock(mMutex);
+		//Post Exit to Thread
+		mExitCalled = true;
+		condSignal();
+	}
+	if (mThread)
+	{
+		mThread->join();
+		DR_SAVE_DELETE(mThread);
+	}
+}
+
 DRThread::~DRThread()
 {
-    if(mThread)
-    {
-        //Post Exit to Thread
-        mExitCalled = true;
-        condSignal();
-		mThread->join();
-			
-		DR_SAVE_DELETE(mThread);
-    }
+	exit();
 }
 
 void DRThread::condSignal()

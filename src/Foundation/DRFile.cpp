@@ -4,7 +4,7 @@
 
 #include "DRCore2/Foundation/DRFile.h"
 #include "DRCore2/Manager/DRFileManager.h"
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 
 //Konstruktor, Copykonstruktor und Deskonstruktor
 DRFile::DRFile()

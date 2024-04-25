@@ -1,5 +1,5 @@
 #include "DRCore2/Foundation/DRUtils.h"
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 
 int DRGetNextPotenz(int iIn)
 {
@@ -345,3 +345,28 @@ DRReturn DRGetPfad(const char* pcInput, char* pcOutput, int iOutBufferSize /* = 
 	return DR_OK;
 }
 
+std::string getValueAsBinaryString(u8 zahl)
+{
+	char buffer[9]; memset(buffer, 0, 9);
+	for (int i = 0; i < 8; i++) {
+		u8 compareZahl = (u8)pow(2.0, i);
+		if ((compareZahl & zahl) == compareZahl) {
+			buffer[i] = '1';
+		}
+		else {
+			buffer[i] = '0';
+		}
+	}
+	return std::string(buffer);
+}
+
+std::string getValueAsBinaryString(int zahl)
+{
+	u8 z1 = zahl & 0x000000ff;
+	u8 z2 = (zahl & 0x0000ff00) >> 8;
+	u8 z3 = (zahl & 0x00ff0000) >> 16;
+	u8 z4 = (zahl & 0xff000000) >> 24;
+	//printf("%d %d %d %d\n", z1, z2, z3, z4);
+	return getValueAsBinaryString(z1) + getValueAsBinaryString(z2) + getValueAsBinaryString(z3) + getValueAsBinaryString(z4);
+
+}

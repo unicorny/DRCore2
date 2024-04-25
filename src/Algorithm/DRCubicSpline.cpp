@@ -1,4 +1,4 @@
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 
 #include "DRCore2/Algorithm/DRCubicSpline.h"
 

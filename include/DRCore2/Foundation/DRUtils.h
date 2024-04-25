@@ -78,6 +78,9 @@ DRCORE2_EXPORT bool DRCheckEndung(const char* pcInput, const char* pcEndung);
 /*//Liefert den Pfad, also alles vor dem letzten / oder \\*/
 DRCORE2_EXPORT DRReturn DRGetPfad(const char* pcInput, char* pcOutput, int iOutBufferSize = 256);
 
+DRCORE2_EXPORT std::string getValueAsBinaryString(u8 zahl);
+DRCORE2_EXPORT std::string getValueAsBinaryString(int zahl);
+
 /*
 DRCORE2_EXPORT DRVector2	DRVector2TransformCoords(const DRVector2& v, const DRMatrix& m, DRReal* const pfOutW = NULL);																																																					// 2D-Vektor mit Matrix multiplizieren
 DRCORE2_EXPORT DRVector2	DRVector2TransformNormal(const DRVector2& v, const DRMatrix& m);																																																												// 2D-Normalenvektor mit Matrix multiplizieren

@@ -63,7 +63,7 @@ void DRLogger::exit()
 //	char acTemp[] = "</body>\n</table></HTML>";
 //	m_File.write(acTemp, sizeof(char)*strlen(acTemp));
 	writeToLogDirect("\n</table></body></HTML>");
-
+	mLogFileName.clear();
 
 	m_File.close();
 }
@@ -226,14 +226,6 @@ DRReturn DRLogger::writeToLogDirect(const char* pcText, ...)
 
 DRReturn DRLogger::writeToLogDirect(std::string text)
 {    
-	//Datei zum anhängen öffnen (wenn sie es nicht schon ist)
-	if(!m_File.isOpen()) m_File.open(mLogFileName.data(), false, "at");
-
-	//wenns nicht geht, Fehler
-	if(!m_File.isOpen()) return DR_ERROR;
-
-	m_File.setFilePointer(0, SEEK_END);
-
     if(m_bPrintToConsole)
     {
         size_t size = text.size();
@@ -254,6 +246,14 @@ DRReturn DRLogger::writeToLogDirect(std::string text)
             DR_SAVE_DELETE_ARRAY(buffer2);
         }
     }
+
+	//Datei zum anhängen öffnen (wenn sie es nicht schon ist)
+	if (!m_File.isOpen()) m_File.open(mLogFileName.data(), false, "at");
+
+	//wenns nicht geht, Fehler
+	if (!m_File.isOpen()) return DR_ERROR;
+
+	m_File.setFilePointer(0, SEEK_END);
         
 	//ersetzen der \n durch <br>
 	std::string final = text;

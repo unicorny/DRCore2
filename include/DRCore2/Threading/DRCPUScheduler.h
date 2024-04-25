@@ -35,7 +35,7 @@
 #define __DR_UNIVERSUM_LIB_CONTROLLER_CPU_SCHEDULER_H__
 
 #include "DRCore2/export.h"
-#include "DRCore2/Foundation/DRLogger.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
 #include "DRMultithreadQueue.h"
 
 #include <string>
@@ -88,7 +88,7 @@ private:
 	std::mutex mCheckStopMutex;
 
 #ifdef DEBUG 
-	DRLogger mSpeedLog;
+	DRMultithreadLogger mSpeedLog;
 #endif
 
 };
