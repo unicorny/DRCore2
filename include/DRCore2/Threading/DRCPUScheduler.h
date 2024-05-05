@@ -86,11 +86,6 @@ private:
 	std::mutex mPendingTasksMutex;
 	bool mStopped;
 	std::mutex mCheckStopMutex;
-
-#ifdef DEBUG 
-	DRMultithreadLogger mSpeedLog;
-#endif
-
 };
 
 #endif //__DR_UNIVERSUM_LIB_CONTROLLER_CPU_SCHEDULER_H__

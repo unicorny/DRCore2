@@ -31,7 +31,7 @@
 
 #include <map>
 
-#ifdef DEBUG
+#ifdef PROFILING
 
 class DRCORE2_EXPORT DRCPUSchedulerTasksLog : public DRMultithreadContainer
 {
@@ -72,6 +72,6 @@ protected:
 	TaskLogEntryMap mTaskLogEntrys;
 
 };
-#endif // DEBUG
+#endif // PROFILING
 
 #endif //__UNI_LIB_DEBUG_CPU_SCHEDULER_TASKS_LOG_H

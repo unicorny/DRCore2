@@ -47,11 +47,7 @@ class DRCPUScheduler;
 class DRCORE2_EXPORT DRCPUSchedulerThread : public DRThread
 {
 public: 
-#ifdef DEBUG
-	DRCPUSchedulerThread(DRCPUScheduler& parent, const char* name, DRMultithreadLogger& speedLog);
-#else 
 	DRCPUSchedulerThread(DRCPUScheduler& parent, const char* name);
-#endif
 
     virtual ~DRCPUSchedulerThread();
 			
@@ -64,9 +60,6 @@ public:
 	void setNewTask(DRTaskPtr cpuTask);
 
 protected:
-#ifdef DEBUG
-	DRMultithreadLogger& mSpeedLog;
-#endif
 			
 private: 
 	DRTaskPtr mWaitingTask;

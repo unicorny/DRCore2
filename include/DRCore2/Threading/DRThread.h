@@ -56,6 +56,7 @@ public:
 
     inline void setName(const char* threadName) { mThreadName = threadName; }
     inline const std::string& getName() const { return mThreadName; }
+    inline bool isExitCalled() { std::unique_lock lock(mMutex); return mExitCalled; }
 protected:
     //! \brief will be called every time from thread, when condSignal was called
     //! will be called from thread with locked working mutex,<br>

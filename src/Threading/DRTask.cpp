@@ -16,7 +16,6 @@ DRTask::DRTask(size_t taskPointerArraySize)
 DRTask::~DRTask()
 {
 	std::lock_guard _lock(mWorkingMutex);
-	DR_SAVE_DELETE(mFinishCommand);
     mDeleted = true;
 }
 

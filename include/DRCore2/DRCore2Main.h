@@ -33,6 +33,24 @@
 
 #include "DRCore2/export.h"
 #include "DRTypes.h"
+#include "DRCore2/Threading/DRMultithreadLogger.h"
+
+#ifdef DEBUG
+#define PROFILING
+#endif
+
+//Globale Variablen
+extern DRMultithreadLogger DRLog;
+#ifdef PROFILING
+extern DRMultithreadLogger DRSpeedLog;
+#endif
+
+//makros für Log Benutzung
+#define WRITETOLOG(str, pl) DRLog.writeToLog(str, pl);
+#define LOG_ERROR(str, ret) {DRLog.LOG_ERROR_INTERN(str); return ret;}
+#define LOG_ERROR_VOID(str) {DRLog.LOG_ERROR_INTERN(str); return;}
+#define LOG_INFO(str) DRLog.LOG_INFO_INTERN(str);
+#define LOG_WARNING(str) DRLog.LOG_WARNING_INTERN(str);
 
 
 /*#ifdef _WIN32

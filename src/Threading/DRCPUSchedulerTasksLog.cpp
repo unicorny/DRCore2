@@ -1,8 +1,8 @@
+#include "DRCore2/DRCore2Main.h"
 #include "DRCore2/Threading/DRCPUSchedulerTasksLog.h"
-#include "DRCore2/Threading/DRMultithreadLogger.h"
 #include <sstream>
 
-#ifdef DEBUG
+#ifdef PROFILING
 
 DRCPUSchedulerTasksLog::DRCPUSchedulerTasksLog()
 	: mInitialized(false)
@@ -75,4 +75,4 @@ std::string DRCPUSchedulerTasksLog::getCurrentlRunningTasksTableString()
 	ss << "</table></td></tr>";
 	return ss.str();
 }
-#endif // DEBUG
+#endif // PROFILING

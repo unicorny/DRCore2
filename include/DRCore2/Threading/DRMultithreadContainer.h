@@ -44,6 +44,7 @@ class DRCORE2_EXPORT DRMultithreadContainer
 {
 public:
 	std::unique_lock<std::recursive_mutex> getUniqueLock(const char* stackDetails = nullptr);
+#define UNIQUE_LOCK auto lock = getUniqueLock(__FUNCTION__)
 	
 	inline const std::string& getLastSucceededLock() { return mLastSucceededLock; }
 protected:
@@ -51,6 +52,7 @@ protected:
 private:
 	std::string mLastSucceededLock;
 };
+
 
 class DRCORE2_EXPORT DRMultithreadContainerLockTimeoutException : public DRCoreBaseException
 {

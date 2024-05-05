@@ -61,11 +61,6 @@ private:
     bool		m_bPrintToConsole;
 
 public:
-	enum class LogFormat {
-		INFO,
-		WARNING,
-		ERROR
-	};
 
 	//Und die &ouml;ffentlichen Funktionen
 	DRLogger();

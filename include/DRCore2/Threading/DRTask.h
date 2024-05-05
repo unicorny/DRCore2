@@ -32,6 +32,7 @@
 #define __DR_UNIVERSUM_LIB_CONTROLLER_TASK_H__
 
 #include "DRCore2/export.h"
+#include "DRCore2/DRTypes.h"
 
 #include <mutex>
 #include <memory>
@@ -44,7 +45,35 @@ typedef std::shared_ptr<DRTask> DRTaskPtr;
 
 class DRCommand {
 public:
-	virtual int taskFinished(DRTask* task) = 0;
+	virtual void taskFinished(DRTask* task) = 0;
+	virtual ~DRCommand() {}
+};
+
+class DRDirtyCommand
+{
+public:
+	virtual void goingDirty() = 0;
+	virtual ~DRDirtyCommand() {}
+};
+
+class DRMultiCommands : public DRCommand
+{
+public:
+	DRMultiCommands(u8 commandsCount = 4) {
+		mCommands.reserve(commandsCount);
+	}
+	virtual ~DRMultiCommands() {}
+	inline void addCommand(std::shared_ptr<DRCommand> command) { 
+		assert(mCommands.size() < mCommands.capacity() && command); 
+		mCommands.push_back(command); 
+	}
+	virtual void taskFinished(DRTask* task) {
+		for(auto command: mCommands) {
+			command->taskFinished(task);
+		}
+	}
+protected:
+	std::vector<std::shared_ptr<DRCommand>> mCommands;
 };
 
 
@@ -63,8 +92,8 @@ public:
 	//! automatic scheduling of task if he isn't finished and sheduled yet
 	virtual bool isTaskFinished();
 	//! \brief called from task scheduler, maybe from another thread
-	//! \return if return 0, mark task as finished
-	virtual int run() = 0;
+	//! \return if return DR_OK, mark task as finished
+	virtual DRReturn run() = 0;
 
 	inline std::unique_lock<std::recursive_mutex> getUniqueLock() { return std::unique_lock(mWorkingMutex); }
 
@@ -78,7 +107,7 @@ public:
 			mParentTaskPtrArray[index] = resourceHolder;
 		}*/
 
-	inline void setFinishCommand(DRCommand* command) { mFinishCommand = command; }
+	inline void setFinishCommand(std::shared_ptr<DRCommand> command) { mFinishCommand = command; }
 
 	// from parent
 	virtual const char* getResourceType() const { return "DRTask"; };
@@ -102,7 +131,7 @@ protected:
 	DRTaskPtr getParent(int index);
 
 	bool mTaskScheduled;
-	DRCommand* mFinishCommand;
+	std::shared_ptr<DRCommand> mFinishCommand;
 private:
 	std::vector<DRTaskPtr> mParentTaskPtrs;
 	std::recursive_mutex mWorkingMutex;

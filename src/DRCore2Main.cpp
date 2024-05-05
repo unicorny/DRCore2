@@ -6,6 +6,12 @@
 int gCurrentNumUser = 0;
 int gCurrentRun = 0;
 
+DRMultithreadLogger DRLog;
+#ifdef DEBUG
+DRMultithreadLogger DRSpeedLog;
+#endif
+
+
 #ifdef _WIN32
 #include <windows.h>
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
@@ -42,6 +48,9 @@ DRReturn Core2_init(const char* logFileName)
     //Logger init
     gCurrentRun++;
     DRLog.init(logFileName, true);
+#ifdef PROFILING
+    DRSpeedLog.init("SpeedLogger.html", false);
+#endif
     LOG_INFO("Core2 init");
     DRFileManager::getSingleton().init();
     return DR_OK;
@@ -53,5 +62,8 @@ void Core2_exit()
     gCurrentRun--;
     DRFileManager::getSingleton().exit();
     LOG_INFO("Core2 exit");
+#ifdef PROFILING
+    DRSpeedLog.exit();
+#endif
     DRLog.exit();
 }

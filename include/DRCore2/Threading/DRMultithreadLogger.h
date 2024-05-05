@@ -69,15 +69,5 @@ protected:
 private:
 
 };
-
-//Globale Variablen
-DRCORE2_EXPORT extern DRMultithreadLogger DRLog;
-
-//makros für Log Benutzung
-#define WRITETOLOG(str, pl) DRLog.writeToLog(str, pl);
-#define LOG_ERROR(str, ret) {DRLog.LOG_ERROR_INTERN(str); return ret;}
-#define LOG_ERROR_VOID(str) {DRLog.LOG_ERROR_INTERN(str); return;}
-#define LOG_INFO(str) DRLog.LOG_INFO_INTERN(str);
-#define LOG_WARNING(str) DRLog.LOG_WARNING_INTERN(str);
  
 #endif //__DR_UNIVERSUM_LIB_ENGINE_LOGGER__

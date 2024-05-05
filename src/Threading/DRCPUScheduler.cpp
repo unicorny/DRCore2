@@ -1,3 +1,4 @@
+#include "DRCore2/DRCore2Main.h"
 #include "DRCore2/Threading/DRCPUScheduler.h"
 #include "DRCore2/Threading/DRCPUSchedulerThread.h"
 #include "DRCore2/Threading/DRCPUTask.h"
@@ -16,11 +17,7 @@ DRCPUScheduler::DRCPUScheduler(uint8_t threadCount, const std::string& name)
 		
 	for(int i = 0; i < threadCount; i++) {
 		sprintf(&nameBuffer[len], "%.2d", i); 
-#ifdef DEBUG
-		mThreads[i] = new DRCPUSchedulerThread(*this, nameBuffer, mSpeedLog);
-#else 
 		mThreads[i] = new DRCPUSchedulerThread(*this, nameBuffer);
-#endif //DEBUG
 	}
 }
 

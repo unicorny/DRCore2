@@ -1,13 +1,15 @@
 //#include "lib/Thread.h"
 //#include "UniversumLib.h"
-#include "DRCore2/DRTypes.h"
+#include "DRCore2/DRCore2Main.h"
 #include "DRCore2/Threading/DRThread.h"
 #include "DRCore2/Foundation/DRBaseExceptions.h"
-#include "DRCore2/Threading/DRMultithreadLogger.h"
 
 DRThread::DRThread(const char* threadName)
-    : mThread(nullptr), mExitCalled(false), mThreadName(threadName)
+    : mThread(nullptr), mExitCalled(false)
 {
+	if (threadName) {
+		mThreadName = threadName;
+	}
 } 
 
 void DRThread::init()

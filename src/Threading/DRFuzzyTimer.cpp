@@ -1,5 +1,5 @@
+#include "DRCore2/DRCore2Main.h"
 #include "DRCore2/Threading/DRFuzzyTimer.h"
-#include "DRCore2/Threading/DRMultithreadLogger.h"
 #include "DRCore2/Foundation/DRBaseExceptions.h"
 
 using namespace std::chrono_literals;

@@ -1,10 +1,8 @@
-
-// #define  _CRT_SECURE_NO_WARNINGS
-#include <string>
-
 #include "DRCore2/Foundation/DRFile.h"
 #include "DRCore2/Manager/DRFileManager.h"
-#include "DRCore2/Threading/DRMultithreadLogger.h"
+#include "DRCore2/DRCore2Main.h"
+
+#include <string>
 
 //Konstruktor, Copykonstruktor und Deskonstruktor
 DRFile::DRFile()

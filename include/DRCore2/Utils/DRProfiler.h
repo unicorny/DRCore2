@@ -22,6 +22,9 @@ public:
 	~DRProfiler();
 
 	inline void reset() { mStartTick = std::chrono::high_resolution_clock::now(); }
+	inline auto duration() const {
+		return std::chrono::high_resolution_clock::now() - mStartTick;
+	};
 	double millis() const;
 	double micros() const;
 	double nanos() const;

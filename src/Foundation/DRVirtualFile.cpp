@@ -1,6 +1,6 @@
+#include "DRCore2/DRCore2Main.h"
 #include "DRCore2/Foundation/DRVirtualFile.h"
 #include "DRCore2/Foundation/DRBaseExceptions.h"
-#include "DRCore2/Threading/DRMultithreadLogger.h"
 
 #define VIRTUAL_FILE_VERSION 1
 
