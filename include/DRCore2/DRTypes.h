@@ -19,7 +19,8 @@ enum DRReturn
 	DR_ERROR = 1,
 	DR_ZERO_POINTER = 2,
 	DR_NOT_ERROR = 3,
-	DR_RENDER = 4
+	DR_RENDER = 4,
+	DR_NOT_IMPLEMENTED = 5
 };
 
 //Makros um etwas schneller zu löschen

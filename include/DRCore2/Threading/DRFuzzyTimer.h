@@ -56,7 +56,7 @@ class DRTimerCallback
 {
 public:
 	virtual TimerReturn callFromTimer() = 0;
-	virtual const char* getResourceType() const { return "TimerCallback"; };
+	virtual const char* getTimerCallbackType() const { return "TimerCallback"; };
 };
 
 class DRCORE2_EXPORT DRFuzzyTimer: public DRThread
