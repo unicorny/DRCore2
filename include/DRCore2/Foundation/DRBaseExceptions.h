@@ -34,6 +34,7 @@
 #include <stdexcept>
 #include <string>
 #include "DRCore2/export.h"
+#include "DRFile.h"
 
 class DRCORE2_EXPORT DRCoreBaseException: public std::runtime_error
 {
@@ -51,6 +52,17 @@ public:
 	virtual std::string toString();
 protected:
 	size_t mSize;
+
+};
+
+class DRCORE2_EXPORT DRFileException : public DRCoreBaseException
+{
+public:
+	explicit DRFileException(const char* what, DRFileErrorCodes errorCode) 
+		: DRCoreBaseException(what), mFileErrorCode(errorCode) {}
+	virtual std::string toString();
+protected:
+	DRFileErrorCodes mFileErrorCode;
 
 };
 #endif //__DR_CORE2_BASE_EXCEPTIONS_H

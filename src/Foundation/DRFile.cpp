@@ -1,4 +1,5 @@
 #include "DRCore2/Foundation/DRFile.h"
+#include "DRCore2/Foundation/DRBaseExceptions.h"
 #include "DRCore2/Manager/DRFileManager.h"
 #include "DRCore2/DRCore2Main.h"
 
@@ -134,7 +135,7 @@ bool DRFile::isOpen()
 
 //************************************************************************************************
 //Gr��e der Datei bestimmen
-unsigned long DRFile::getSize()
+size_t DRFile::getSize()
 {
 	//Wenn die Datei nicht ge�ffnet ist, ist schluss
 	if(!isOpen()) return 0;
@@ -193,8 +194,6 @@ DRFileErrorCodes DRFile::read(void* pDatenOut, size_t ulSize, size_t ulCount, si
 	size_t ulReadedBytesTemp = 0;
 
 	//Aus Dati lesen
-//	const bool bResult = ReadFile(m_pFile, pDatenOut, lSize, &ulReadedBytesTemp, NULL) && ulReadedBytesTemp == lSize;
-	if (!mFile) LOG_ERROR("file isn't open anymore", File_error_file_is_not_open);
 	ulReadedBytesTemp = fread(pDatenOut, ulSize, ulCount, mFile);
 
 	// Wenn die tats�chlich gelesenen Bytes angefordert werden, werden diese auch �bergeben.
@@ -204,6 +203,20 @@ DRFileErrorCodes DRFile::read(void* pDatenOut, size_t ulSize, size_t ulCount, si
     // Funktion mit richtigem Fehlercode beenden, gab es einen Fehler mu� dies bekannt werden.
 	return File_OK;
 
+}
+
+//*********************************************************************************************************
+
+std::string DRFile::readAsString()
+{
+	unsigned long size = getSize();
+	std::string result;
+	result.resize(size, 0);
+	auto errorCode = read(result.data(), size, 1);
+	if(errorCode) {
+		throw DRFileException("error reading file", errorCode);
+	}
+	return std::move(result);
 }
 
 //*****************************************************************************************************************
@@ -301,4 +314,33 @@ bool DRIsFileExist(const char* pcFilename)
 	}
 	//LOG("%s nicht vorhanden", pcFilename);
 	return false;
+}
+
+std::string DRFileErrorCodeToString(DRFileErrorCodes errorCode)
+{
+	switch (errorCode)
+	{
+	case File_OK:
+		return "File_OK";
+	case File_error_cannot_create_File:
+		return "File_error_cannot_create_File";
+	case File_error_file_is_not_open:
+		return "File_error_file_is_not_open";
+	case File_error_could_not_write_all:
+		return "File_error_could_not_write_all";
+	case File_error_could_not_read_all:
+		return "File_error_could_not_read_all";
+	case File_error_NullPointer:
+		return "File_error_NullPointer";
+	case File_error_pointer_distance_to_great:
+		return "File_error_pointer_distance_to_great";
+	case File_error_could_not_set_pointer:
+		return "File_error_could_not_set_pointer";
+	case File_error_could_not_get_pointer:
+		return "File_error_could_not_get_pointer";
+	case File_error_File_didnt_exist:
+		return "File_error_File_didnt_exist";
+	default:
+		return "Unknown error code";
+	}
 }

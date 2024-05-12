@@ -100,12 +100,12 @@ DRReturn DRFuzzyTimer::move()
 			if (ret == TimerReturn::REPORT_ERROR) {
 				DRLog.writeToLog(
 					"timer run report error: timer type: %s, timer name: %s",
-					std::string(it->second.callback->getResourceType()), it->second.name);				
+					std::string(it->second.callback->getTimerCallbackType()), it->second.name);
 			}
 			else if (ret == TimerReturn::EXCEPTION) {
 				DRLog.writeToLog(
 					"timer run throw a exception: timer type: %s, timer name: %s",
-					std::string(it->second.callback->getResourceType()), it->second.name);
+					std::string(it->second.callback->getTimerCallbackType()), it->second.name);
 			}
 		}
 		mRegisteredAtTimer.erase(it);					

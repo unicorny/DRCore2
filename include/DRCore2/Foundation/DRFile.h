@@ -31,6 +31,7 @@ Zum laden, speichern und erstellen von Datein
 #include "DRCore2/DRTypes.h"
 
 #include <stdio.h>
+#include <string>
 
 //***************************************************************************************
 
@@ -78,13 +79,15 @@ public:
         
 	//! \brief Groesse der Datei
 	//! \return 0 bei Error, sonst Dateigroesse
-	unsigned long getSize();
+	size_t getSize();
 
 	//Daten in die geoeffnete Datei schreiben
 	DRFileErrorCodes write(const void* pDatenIn, size_t ulSize, size_t ulCount, size_t* plWrittenBytesOut = nullptr);
 
 	//Daten aus datei lesen
 	DRFileErrorCodes read(void* pDatenOut, size_t ulSize, size_t ulCount, size_t* plReadedBytesOut = nullptr);
+
+	std::string readAsString();
 
 	//Zuweisungsoperator
 	const DRFile& operator = (const DRFile& otherFile) {mFile = otherFile.mFile; return *this;}
@@ -105,11 +108,10 @@ private:
 
 	//! Zeiger auf die Datei
 	FILE*		mFile;
-	long		mFileSize;
-
-
+	size_t		mFileSize;
 };
 
 DRCORE2_EXPORT bool DRIsFileExist(const char* pcFilename);
+DRCORE2_EXPORT std::string DRFileErrorCodeToString(DRFileErrorCodes errorCode);
 
 #endif //__DR_CORE2_FILE__

@@ -24,3 +24,10 @@ std::string DRMemoryException::toString()
 	}
 	return result;
 }
+
+std::string DRFileException::toString()
+{
+	std::string result = what();
+	result += ", error code: " + DRFileErrorCodeToString(mFileErrorCode);
+	return result;
+}
