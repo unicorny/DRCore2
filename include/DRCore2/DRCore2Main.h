@@ -40,9 +40,9 @@
 #endif
 
 //Globale Variablen
-extern DRMultithreadLogger DRLog;
+DRCORE2_EXPORT extern DRMultithreadLogger DRLog;
 #ifdef PROFILING
-extern DRMultithreadLogger DRSpeedLog;
+DRCORE2_EXPORT extern DRMultithreadLogger DRSpeedLog;
 #endif
 
 //makros für Log Benutzung
