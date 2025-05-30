@@ -111,14 +111,9 @@ public:
 
 	// from parent
 	virtual const char* getResourceType() const { return "DRTask"; };
-#ifdef DEBUG
+
 	virtual const char* getName() const { return mName.data(); }
 	inline void setName(const char* name) { mName = name; }
-#else
-	virtual const char* getName() const { return ""; }
-#endif
-
-	// type check
 
 	virtual void scheduleTask(DRTaskPtr own) = 0;
 
@@ -138,10 +133,7 @@ private:
 	bool     mDeleted;
 	bool     mFinished;
 
-#ifdef DEBUG
 	std::string mName;
-#endif
-
 };
 
 #endif //__DR_UNIVERSUM_LIB_CONTROLLER_TASK_H__
