@@ -18,6 +18,7 @@ DRCPUScheduler::DRCPUScheduler(uint8_t threadCount, const std::string& name)
 	for(int i = 0; i < threadCount; i++) {
 		sprintf(&nameBuffer[len], "%.2d", i); 
 		mThreads[i] = new DRCPUSchedulerThread(*this, nameBuffer);
+		mThreads[i]->init();
 	}
 }
 
